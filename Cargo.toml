@@ -1,0 +1,23 @@
+[package]
+name = "maze"
+version = "0.1.0"
+authors = ["Kurt Symanzik <kurt@kbsymanzik.org>"]
+
+[dependencies]
+rand = "0.3.15"
+uuid = { version = "0.4", features = ["v4"] }
+serde = "*"
+serde_derive = "*"
+serde_json = "0.9"
+image = "*"
+imageproc = "0.7.0"
+rusttype = "*"
+
+[lib]
+name = "kbsymanz_maze"
+path = "src/lib.rs"
+
+[[bin]]
+name = "maze"
+path = "src/main.rs"
+
