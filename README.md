@@ -2,7 +2,7 @@
 
 A maze generation program written in Rust.
 
-![[https://github.com/kbsymanz/maze-rust/blob/master/sample_maze.png|alt=Sample-Maze]]
+![[sample_maze.png|alt=Sample-Maze]]
 
 ## Features
 
