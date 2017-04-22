@@ -2,11 +2,15 @@
 
 A maze generation program written in Rust.
 
+![[https://github.com/kbsymanz/maze-rust/blob/master/sample_maze.png|alt=Sample-Maze]]
+
 ## Features
 
 - Generates mazes in PNG and/or JSON format.
 - Saves to files with unique UUID file names.
 - Batch mode allows generating many mazes at once.
+    - On my laptop, can generate 1000 40x40 mazes in PNG and JSON format in
+      about 17 seconds.
 - Specify the size of the maze to generate.
 - Uses the recursive backtracker algorithm.
 - GUI mode generates mazes and displays them.
