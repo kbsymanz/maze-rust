@@ -96,19 +96,20 @@ impl Grid {
     pub fn save(&self, png_output: bool, json_output: bool) {
         let uuid = Uuid::new_v4().hyphenated().to_string();
         if png_output {
-            self.save_png(&uuid);
-            print!("{}.png ", uuid);
+            let fname: String = format!("{}.png", uuid);
+            self.save_png(&fname);
+            print!("{} ", fname);
         }
         if json_output {
-            self.save_json(&uuid);
-            print!("{}.json ", uuid);
+            let fname: String = format!("{}.json", uuid);
+            self.save_json(&fname);
+            print!("{} ", fname);
         }
         println!("");
     }
 
-    pub fn save_png(&self, uuid: &String) {
-        let fname = format!("{}.png", uuid);
-        let filename = Path::new(&fname);
+    pub fn save_png(&self, name: &String) {
+        let filename = Path::new(&name);
 
         let img_width = 800u32;
         let img_height = 800u32;
@@ -178,8 +179,7 @@ impl Grid {
     }
 
 
-    pub fn save_json(&self, uuid: &String) {
-        let filename = format!("{}.json", uuid);
+    pub fn save_json(&self, filename: &String) {
         let file = match File::create(&filename) {
             Err(msg) => panic!("Error creating file {}: {}", filename, msg),
             Ok(file) => file,

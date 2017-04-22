@@ -8,6 +8,7 @@ extern crate kbsymanz_maze;
 
 // Local
 use kbsymanz_maze::grid;
+use kbsymanz_maze::gui::main_gui::{main_gui};
 
 // Third-party
 use clap::{App, Arg};
@@ -40,6 +41,11 @@ fn main() {
                          .long("size")
                          .help("Size of the maze, i.e. number of cells wide and high.")
                          .takes_value(true))
+                    .arg(Arg::with_name("gui")
+                         .short("g")
+                         .long("gui")
+                         .help("Show a graphical user interface, i.e. window.")
+                         .takes_value(false))
                     .get_matches();
 
     // Number of mazes to generate, defaults to one.
@@ -56,25 +62,34 @@ fn main() {
     // Size of the maze, defaults to 40 x 40.
     let size = matches.value_of("size").unwrap_or("40").parse::<usize>().unwrap_or(40);
 
-    print!("Generating {} maze", num_mazes);
-    if num_mazes > 1 {
-        print!("s");
-    }
-    println!(":");
+    // The GUI interface
+    let gui: bool = matches.is_present("gui");
 
-    for i in 0..num_mazes {
-        let mut grid = grid::Grid {
-            width: size,
-            height: size,
-            cells: vec![],
-            back_track: vec![],
-            visited: HashSet::new(),
-        };
-        grid.init();
-        grid.carve(0, 0);
-        grid.sanity();
-        grid.save(output_png, output_json);
+
+    if gui {
+        main_gui();
+    } else {
+        // The command-line interface.
+        print!("Generating {} maze", num_mazes);
+        if num_mazes > 1 {
+            print!("s");
+        }
+        println!(":");
+
+        for i in 0..num_mazes {
+            let mut grid = grid::Grid {
+                width: size,
+                height: size,
+                cells: Vec::with_capacity(size * size),
+                back_track: Vec::with_capacity(size * size),
+                visited: HashSet::with_capacity(size * size),
+            };
+            grid.init();
+            grid.carve(0, 0);
+            grid.sanity();
+            grid.save(output_png, output_json);
+        }
+        println!("");
+        println!("Created {} mazes.", num_mazes);
     }
-    println!("");
-    println!("Created {} mazes.", num_mazes);
 }

@@ -12,7 +12,12 @@ rusttype = "*"
 serde = "*"
 serde_derive = "*"
 serde_json = "0.9"
+tempdir = "0.3"
 uuid = { version = "0.4", features = ["v4"] }
+
+[dependencies.gtk]
+version = "0.1.2"
+features = ["v3_10"]
 
 [lib]
 name = "kbsymanz_maze"
